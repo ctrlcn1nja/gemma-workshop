@@ -1,0 +1,11 @@
+# Normalize text files in the repo
+* text=auto
+
+# Shell scripts must keep Unix line endings, or bash fails on Windows clones (WSL/Git Bash)
+*.sh text eol=lf
+
+# PowerShell is happiest with Windows line endings
+*.ps1 text eol=crlf
+
+# Ollama Modelfile: keep LF so it is identical everywhere
+Modelfile text eol=lf

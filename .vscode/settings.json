@@ -1,0 +1,9 @@
+{
+  // Turn off inline autocomplete so the AI cannot type the fix for you.
+  "github.copilot.enable": { "*": false },
+  "editor.inlineSuggest.enabled": false,
+
+  // Keep the editor simple for the workshop.
+  "files.exclude": { "**/__pycache__": true },
+  "python.terminal.activateEnvironment": false
+}
