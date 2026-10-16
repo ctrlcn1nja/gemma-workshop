@@ -99,3 +99,55 @@ Each folder has a `TASK.md` with instructions. Start with Task 1.
 | Answers are very slow | Close other apps. Set `num_ctx` to `8192` in `Modelfile` and rerun setup. |
 | The tutor "forgot" the code | Your context window is too small. Rerun setup with the `Modelfile`. |
 | No **debug-tutor** in the agent list | Make sure you opened *this* folder, not its parent. |
+
+
+## Tuning the model for your laptop
+
+Both settings live in the `Modelfile`. After any change, rerun:
+
+    ollama create gemma4-workshop -f Modelfile
+
+Then in VS Code, run **Ollama: Refresh Models** (or reload the window).
+
+### Context size (how much the model can "see" at once)
+
+Change this line in `Modelfile`:
+
+    PARAMETER num_ctx 16384
+
+| Value | When to use |
+| --- | --- |
+| 8192 | Laptop with 8 GB RAM, or answers are very slow |
+| 16384 | Default, good for most laptops |
+| 32768 | 16 GB+ RAM and the tutor seems to "forget" your file |
+| 65536 | 32 GB+ RAM or a strong GPU |
+
+### GPU or CPU
+
+Ollama uses your GPU automatically if it can. To choose yourself,
+add one of these lines to `Modelfile`:
+
+    PARAMETER num_gpu 0     # CPU only: slower, works on every laptop
+    PARAMETER num_gpu 99    # put the whole model on the GPU (if it fits)
+
+Leave the line out to let Ollama decide (recommended).
+
+### Check what you actually got
+
+Ask the tutor one question, then run:
+
+    ollama ps
+
+Look at the PROCESSOR column:
+- `100% GPU`: running fully on your graphics card (fastest)
+- `100% CPU`: running on the processor only
+- `30%/70% CPU/GPU`: split between them. If it's slow, lower `num_ctx`
+  until it shows `100% GPU`.
+
+Notes:
+- **Mac (Apple Silicon):** the GPU shares memory with the system, so
+  Ollama uses it automatically. You don't need `num_gpu`.
+- **Windows/Linux with NVIDIA:** the GPU is used automatically if the
+  drivers are up to date.
+- **Laptops with only built-in Intel/AMD graphics:** expect CPU.
+  That's fine, just slower.
