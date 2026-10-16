@@ -25,7 +25,7 @@ The model download is about 10 GB. Please download it at home, not on workshop W
 ### 2. Get the workshop files
 
 ```
-git clone https://github.com/YOUR-ORG/gemma-workshop.git
+git clone https://github.com/ctrlcn1nja/gemma-workshop.git
 cd gemma-workshop
 ```
 
