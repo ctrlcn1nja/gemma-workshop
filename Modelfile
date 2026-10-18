@@ -3,6 +3,7 @@ FROM gemma4:e4b
 # Context window in tokens. Copilot sends long prompts plus your file,
 # so the small default is not enough. Use 8192 on laptops with 8 GB of RAM.
 PARAMETER num_ctx 16384
+PARAMETER num_gpu 99 
 
 # Google's recommended sampling settings for Gemma 4
 PARAMETER temperature 1.0
